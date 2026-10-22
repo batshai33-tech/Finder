@@ -5,12 +5,12 @@ import { ITEM_CATEGORY_OPTIONS, mockItems } from '../mocks/mockItems.js'
  * ===== 백엔드 없이 동작하기 위한 임시 코드 시작 =====
  *
  * 브라우저 localStorage를 임시 데이터베이스로 사용해서 등록, 수정, 삭제를 확인할 수 있게 한다.
- * 백엔드 API가 준비되면 아래 값을 false로 바꾸면, 각 함수의 axios API 호출 코드가 다시 사용된다.
+ * 백엔드 API가 준비되면 VITE_USE_MOCK_API=false로 설정해서 실제 API를 사용한다.
  * 이 임시 데이터는 현재 브라우저에만 저장되며 다른 사람에게는 보이지 않는다.
  * TODO: 고정 물품 종류인 itemCategory를 실제로 저장/검색하려면 백엔드 item DTO와 DB에도 itemCategory 필드를 추가해야 한다.
  */
-// true: 브라우저 임시 데이터 사용, false: 아래 axios 코드로 백엔드 DB와 통신
-export const USE_LOCAL_MOCK_API = true
+// 기본값은 기존 임시 데이터 모드다. 환경 변수는 문자열이므로 'false'와 비교한다.
+export const USE_LOCAL_MOCK_API = import.meta.env.VITE_USE_MOCK_API !== 'false'
 const LOCAL_ITEMS_KEY = 'findgo-local-items'
 
 const LEGACY_CATEGORY_LABELS = {

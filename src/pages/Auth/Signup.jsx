@@ -51,7 +51,9 @@ function Signup() {
       navigate('/login')
     } catch (err) {
       console.error(err)
-      setError('회원가입에 실패했습니다. 입력 정보를 확인해주세요.')
+      setError(err.code === 'ERR_API_NOT_CONFIGURED' || !err.response
+        ? '서버에 연결할 수 없습니다. 잠시 후 다시 시도해주세요.'
+        : '회원가입에 실패했습니다. 입력 정보를 확인해주세요.')
     } finally {
       setLoading(false)
     }
